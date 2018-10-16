@@ -1,4 +1,4 @@
-/* TEST for Git */
+/* TEST for Git (upd2) */
 
 #include "DHT.h" //подключаем библ. датчка Т.
 
