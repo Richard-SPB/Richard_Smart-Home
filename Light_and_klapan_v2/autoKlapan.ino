@@ -1,5 +1,3 @@
-/* тест синхронизации с Git */
-
 void autoKlapanfunc() {
   switch (autoKlapan) {
     case 0:
@@ -10,16 +8,16 @@ void autoKlapanfunc() {
 
     case 5:
       // auto mode
-      // если переключили в ручной режим, уходим
+      // РµСЃР»Рё РїРµСЂРµРєР»СЋС‡РёР»Рё РІ СЂСѓС‡РЅРѕР№ СЂРµР¶РёРј, СѓС…РѕРґРёРј
       if (!klapanmode) autoKlapan = 30; //GO
       if ((ms - klapanMs) > 5000) {
         klapanMs = ms;
         float t = dht.readTemperature();
-        if (isnan(t)) return; // если ошибка чтения с датчика
+        if (isnan(t)) return; // РµСЃР»Рё РѕС€РёР±РєР° С‡С‚РµРЅРёСЏ СЃ РґР°С‚С‡РёРєР°
         if (t > MAXTEMPERATURE) {
           digitalWrite(KLAPAN, RELAY_OFF);
 
-          /* Добавил выкл. светодиод состояния*/
+          /* Р”РѕР±Р°РІРёР» РІС‹РєР». СЃРІРµС‚РѕРґРёРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ*/
           digitalWrite(LEDKLAPAN, 0);
 
           stateklapan = 0;
@@ -33,7 +31,7 @@ void autoKlapanfunc() {
         } else if (t < MAXTEMPERATURE) {
           digitalWrite(KLAPAN, RELAY_ON);
 
-          /* Добавил работающий светодиод состояния*/
+          /* Р”РѕР±Р°РІРёР» СЂР°Р±РѕС‚Р°СЋС‰РёР№ СЃРІРµС‚РѕРґРёРѕРґ СЃРѕСЃС‚РѕСЏРЅРёСЏ*/
           digitalWrite(LEDKLAPAN, 1);
           stateklapan = 1;
 #ifdef DEBUG
@@ -53,9 +51,9 @@ void autoKlapanfunc() {
       break;
 
     case 22:
-      // отрисовка отключения клапана вручную
-      //трижды мигаем, затухаем
-      showKlapanState(255); //включаем подсветки
+      // РѕС‚СЂРёСЃРѕРІРєР° РѕС‚РєР»СЋС‡РµРЅРёСЏ РєР»Р°РїР°РЅР° РІСЂСѓС‡РЅСѓСЋ
+      //С‚СЂРёР¶РґС‹ РјРёРіР°РµРј, Р·Р°С‚СѓС…Р°РµРј
+      showKlapanState(255); //РІРєР»СЋС‡Р°РµРј РїРѕРґСЃРІРµС‚РєРё
       delay(100);
       showKlapanState(0);
       delay(100);
@@ -72,15 +70,15 @@ void autoKlapanfunc() {
         delay(3);
       }//for
       delay(200);
-      makelamps();  // возвращаем подсветку на исходное
+      makelamps();  // РІРѕР·РІСЂР°С‰Р°РµРј РїРѕРґСЃРІРµС‚РєСѓ РЅР° РёСЃС…РѕРґРЅРѕРµ
       stateklapan = 0;
       digitalWrite(KLAPAN, stateklapan);
       autoKlapan = 10; // GO
       break;
 
     case 24:
-      // отрисовка ВКЛЮЧЕНИЯ клапана вручную
-      showKlapanState(255); //включаем подсветки
+      // РѕС‚СЂРёСЃРѕРІРєР° Р’РљР›Р®Р§Р•РќРРЇ РєР»Р°РїР°РЅР° РІСЂСѓС‡РЅСѓСЋ
+      showKlapanState(255); //РІРєР»СЋС‡Р°РµРј РїРѕРґСЃРІРµС‚РєРё
       delay(100);
       showKlapanState(0);
       delay(100);
@@ -97,15 +95,15 @@ void autoKlapanfunc() {
         delay(3);
       }//for
       delay(200);
-      makelamps();  // возвращаем подсветку на исходное
+      makelamps();  // РІРѕР·РІСЂР°С‰Р°РµРј РїРѕРґСЃРІРµС‚РєСѓ РЅР° РёСЃС…РѕРґРЅРѕРµ
       stateklapan = 1;
       digitalWrite(KLAPAN, stateklapan);
       autoKlapan = 10; // GO
       break;
 
     case 26:
-      // отрисовка запрета на изм сост клапана
-      showKlapanState(255); //включаем подсветки
+      // РѕС‚СЂРёСЃРѕРІРєР° Р·Р°РїСЂРµС‚Р° РЅР° РёР·Рј СЃРѕСЃС‚ РєР»Р°РїР°РЅР°
+      showKlapanState(255); //РІРєР»СЋС‡Р°РµРј РїРѕРґСЃРІРµС‚РєРё
       delay(300);
       showKlapanState(0);
       delay(100);
@@ -113,20 +111,20 @@ void autoKlapanfunc() {
       delay(100);
       showKlapanState(0);
       delay(100);
-      makelamps();  // возвращаем подсветку на исходное
+      makelamps();  // РІРѕР·РІСЂР°С‰Р°РµРј РїРѕРґСЃРІРµС‚РєСѓ РЅР° РёСЃС…РѕРґРЅРѕРµ
       autoKlapan = 5; // GO
       break;
 
     case 30:
       //transition from auto to manual
-      showKlapanState(255); //включаем подсветки
+      showKlapanState(255); //РІРєР»СЋС‡Р°РµРј РїРѕРґСЃРІРµС‚РєРё
       delay(500);
       for (int i = 255; i > 0; i--) {
         showKlapanState(i);
         delay(10);
       }//for
       delay(500);
-      makelamps(); // вновь зажжем подсветку кнопок как должна быть
+      makelamps(); // РІРЅРѕРІСЊ Р·Р°Р¶Р¶РµРј РїРѕРґСЃРІРµС‚РєСѓ РєРЅРѕРїРѕРє РєР°Рє РґРѕР»Р¶РЅР° Р±С‹С‚СЊ
       autoKlapan = 10; //GO
 #ifdef DEBUG
       Serial.println(" KLAPAN in manual mode");
@@ -136,15 +134,15 @@ void autoKlapanfunc() {
 
     case 40:
       //transition from manual to auto
-      // отрисовываем и меняем состояние
-      showKlapanState(0); // тушим подсветки
+      // РѕС‚СЂРёСЃРѕРІС‹РІР°РµРј Рё РјРµРЅСЏРµРј СЃРѕСЃС‚РѕСЏРЅРёРµ
+      showKlapanState(0); // С‚СѓС€РёРј РїРѕРґСЃРІРµС‚РєРё
       delay(500);
       for (int i = 0; i < 255; i++) {
         showKlapanState(i);
         delay(10);
       }//for
       delay(500);
-      makelamps(); // вновь зажжем подсветку кнопок как должна быть
+      makelamps(); // РІРЅРѕРІСЊ Р·Р°Р¶Р¶РµРј РїРѕРґСЃРІРµС‚РєСѓ РєРЅРѕРїРѕРє РєР°Рє РґРѕР»Р¶РЅР° Р±С‹С‚СЊ
       autoKlapan = 5; //GO
 #ifdef DEBUG
       Serial.println(" KLAPAN in auto mode");
