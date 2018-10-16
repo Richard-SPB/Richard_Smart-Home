@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "задача-autobut",
+      "appliesTo": "Light_and_klapan_v2/autobut.ino",
+      "type": "launch"
+    }
+  ]
+}
