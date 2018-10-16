@@ -1,3 +1,5 @@
+/* тест синхронизации с Git */
+
 void autoKlapanfunc() {
   switch (autoKlapan) {
     case 0:
