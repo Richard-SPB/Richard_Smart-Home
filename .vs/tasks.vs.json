@@ -15,6 +15,11 @@
       "taskName": "задача-Richard_Smart-Home",
       "appliesTo": "/",
       "type": "launch"
+    },
+    {
+      "taskName": "задача-Light_and_klapan_Source Code",
+      "appliesTo": "Light_and_klapan_Source Code/",
+      "type": "launch"
     }
   ]
 }
