@@ -5,6 +5,16 @@
       "taskName": "задача-autobut",
       "appliesTo": "Light_and_klapan_v2/autobut.ino",
       "type": "launch"
+    },
+    {
+      "taskName": "задача-Richard_Smart-Home",
+      "appliesTo": "/",
+      "type": "launch"
+    },
+    {
+      "taskName": "задача-Richard_Smart-Home",
+      "appliesTo": "/",
+      "type": "launch"
     }
   ]
 }

@@ -31,18 +31,6 @@
 #define BUTTON2 A2 // кнопка включения лампы №2
 #define BUTTON3 A3 // кнопка включения лампы №3
 #define BUTTON4 A4 // кнопка включения светодиодной подсветки
-
-//Добавляем новые кнопки
-
-#define BUTTON5 A1 //Присвоить  ПИНЫ к новым кнопкам: Ночник для чтения 1
-#define BUTTON6 A1 //Присвоить  ПИНЫ к новым кнопкам: Ночник для чтения 2
-#define BUTTON7 A1 // Зона над подиумом 1 
-#define BUTTON8 A1 // Зона над подиумом 2
-#define BUTTON9 A1 // Зона над подиумом 1 
-#define BUTTON10 A1
-#define BUTTON11 A1
-#define BUTTON12 A1
-
 // в зависимости от типа кнопки, если это обычная механическая кнопка, 
 //подключенная к GND, то устанавливаем ACTIVE 0 
 // если электронная кнопка, возможно ACTIVE 1
@@ -53,9 +41,6 @@
 #define LAMP2 4
 #define LAMP3 5
 #define RGBWSTRIP 7
-
-
-
 // тип управления реле
 // если включается нулем, оставить как есть, если включается единицей, поменять 1 и 0 местами
 // чтобы убедиться что эти параметры установлены правильно, при первом включении после перепрошивки
@@ -74,8 +59,6 @@
 #define LEDLAMP3 10
 #define LEDRGBWSTRIP 11
 
-//
-
 
 // для вывода в консоль отладочных сообщений расскомментировать
 //#define DEBUG
@@ -83,30 +66,13 @@
 
 DHT dht(DHTPIN, DHTTYPE);
 
-bool statelamp1 = 0;//Освещение 1
-bool statelamp2 = 0;//Освещение 2
-bool statelamp3 = 0;//Освещение периметра + карниз
-bool statergbwstrip = 0;// светодиодная лента RGBW (периметр)
-
- 
+bool statelamp1 = 0;
+bool statelamp2 = 0;
+bool statelamp3 = 0;
+bool statergbwstrip = 0;
 bool stateklapan = 0; // состояние клапан открыто \ закрыто
 bool klapanmode = 0; // состояние режима работы клапана. 0 - ручной режим, 1 - авто режим от датчика температуры
 
-//Новые приборы (с аналогичным алгоритмом работы с которые были ранее)
-bool statenightlight1 = 0; // Ночник для чтения 1
-bool statenightlight2 = 0; // Ночник для чтения 2
-
-
-// Новые приборы (с только на вкл и выкл + наджатие любой кнопки из всех в проекте = выкл все!)
-bool statecornice = 0; // освещение карниза
-bool statetheatrelight1 = 0; // Зона над подиумом 1 
-bool statetheatrelight2 = 0; // Зона над подиумом 2
-bool statetheatrelight3 = 0; // Зона над подиумом 3
-bool statetheatrelight4 = 0; // Зона над подиумом 4
-bool stateuvlight =0; // Ультрафиолетовая лампа
-bool statelightmusic = 0; //Светомузыка
-bool statergbwstrip2 = 0;// светодиодная лента RGBW (подиум)
-bool staterezerv = 0;// резерв
 
 byte autoBut = 0; // автомат обработки всех 4  кнопок 
 byte autoButprev  = 0; // для отладки

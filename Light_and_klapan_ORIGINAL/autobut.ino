@@ -20,42 +20,31 @@ switch(autoBut){
   butcount = 0;
   autoBut = 3; // GO
   break;
-
-
-  
   case 3:
   if((ms - butMs) > 10){
     butMs = ms;
-    
-    if(digitalRead(BUTTON1) == ACTIVE){//если кнопка1 нажата
-      autoBut = 5; // тогда переходим на кейс 5
-    } else if(digitalRead(BUTTON2) == ACTIVE){ // Или если кнопка2 нажата
-      autoBut = 6; //тогда переходим на кейс 6
-    } else if(digitalRead(BUTTON3) == ACTIVE){ //Или если кнопка3 нажата
-      autoBut = 7; //тогда переходим на кейс 7
-    } else if(digitalRead(BUTTON4) == ACTIVE){ //Или если кнопка4 нажата
-      autoBut = 8; //тогда переходим на кейс 8 
+    if(digitalRead(BUTTON1) == ACTIVE){
+      autoBut = 5; //GO
+    } else if(digitalRead(BUTTON2) == ACTIVE){
+      autoBut = 6; //GO
+    } else if(digitalRead(BUTTON3) == ACTIVE){
+      autoBut = 7; //GO
+    } else if(digitalRead(BUTTON4) == ACTIVE){
+      autoBut = 8; //GO
     }//if any Button
   }//if ms
   break;
-
-
-
-  //КЕЙС 5 (работа кнопки 1)
-  
   case 5:
   // кнопка 1 нажата? Если да, то если нажата еще и кнопка 4, идем на их взаимную обработку
   // пока кнопка 1 нажата, если больше 30*50 мс, то нажатие длительное - отключаем весь свет
   // если кнопку отпустили раньше чем 30*50, нажатие короткое - меняем состояние света 
-  
-  
   if((ms - butMs) > 30){
     butMs = ms;
-    if(digitalRead(BUTTON1) == ACTIVE){// Если кнопка 1 нажата
-      if(digitalRead(BUTTON4) == ACTIVE){ // выполняем: Если нажата Кнопка4
+    if(digitalRead(BUTTON1) == ACTIVE){
+      if(digitalRead(BUTTON4) == ACTIVE){
         // нажаты 1 и 4, идем на их взаимную обработку
         butcount = 0;
-        autoBut = 60; // Тогда переходим на КЕЙС 60
+        autoBut = 60; //GO 
         #ifdef DEBUG
         Serial.println("1 & 4 but noticed");
         #endif
@@ -72,23 +61,19 @@ switch(autoBut){
         butcount = 0;
         autoBut = 99; // GO на ожидание отпускания кнопок
       }
-    } else { // Иначе при нажатии на Кнопку1 (без нажатия Кнопки4)
+    } else { //BUT 1 released
       if (butcount){
         #ifdef DEBUG
         Serial.println("short 1 fixed");
         #endif
         butcount = 0;
         statelamp1 = !statelamp1; // инвертируем состояние света
-        makelamps(); //Запускаем функцию работы ламп. Она прописана в самом низу. включим лампы и подсветку в новое состояние 
+        makelamps(); //включим лампы и подсветку в новое состояние 
       } 
-      autoBut = 99; // Переходим на КЕЙС 99 (. GO на ожидание отпускания кнопок 
+      autoBut = 99; // GO на ожидание отпускания кнопок 
     }// no buttons pressed
   }//if ms
   break;
- 
-  
-  //КЕЙС 6 (работа кнопки 2)
-  
   case 6:
   // кнопка 2 нажата? Если да, то если нажата еще и кнопка 3, идем на их взаимную обработку
   // пока кнопка 2 нажата, если больше 30*50 мс, то нажатие длительное - отключаем весь свет
@@ -129,9 +114,6 @@ switch(autoBut){
     }// no buttons pressed
   }//if ms
   break;
-
-//КЕЙС 7 (работа кнопки 3)
-  
   case 7:
   // кнопка 3 нажата? Если да, то если нажата еще и кнопка 2, идем на их взаимную обработку
   // пока кнопка 2 нажата, если больше 30*50 мс, то нажатие длительное - отключаем весь свет
@@ -172,14 +154,10 @@ switch(autoBut){
     }// no buttons pressed
   }//if ms
   break;
-
-  //КЕЙС 8 (работа кнопки 4)
-  
   case 8:
   // кнопка 4 нажата? Если да, то если нажата еще и кнопка 1, идем на их взаимную обработку
   // пока кнопка 4 нажата, если больше 30*50 мс, то нажатие длительное - отключаем весь свет
   // если кнопку отпустили раньше чем 30*50, нажатие короткое - меняем состояние света 
-  
   if((ms - butMs) > 30){
     butMs = ms;
     if(digitalRead(BUTTON4) == ACTIVE){
@@ -276,7 +254,7 @@ switch(autoBut){
   }//if ms
   break; 
 
-//КЕЙС 99
+
    
   case 99:
   // ждем пока все кнопки будут отпущены
